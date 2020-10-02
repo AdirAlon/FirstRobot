@@ -6,6 +6,7 @@ import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gripper;
 
 public class Feed extends CommandBase {
+
      Feeder feeder;
     double timer;
 
