@@ -8,12 +8,16 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Feed;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gripper;
+import frc.robot.subsystems.Shooter;
 
 import java.net.PortUnreachableException;
 
@@ -24,10 +28,12 @@ import java.net.PortUnreachableException;
  * project.
  */
 public class Robot extends TimedRobot {
+
   public static Command m_autonomousCommand;
   public static Drivetrain drivetrain;
 public static Gripper gripper;
-
+public static Feeder feeder;
+public static Shooter shooter;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -38,6 +44,8 @@ public static Gripper gripper;
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
 drivetrain = new Drivetrain(new WPI_TalonSRX(RoborMap.CAN.LEFT), new WPI_TalonSRX(RoborMap.CAN.RIGHT));
+feeder = new Feeder(new WPI_VictorSPX(RoborMap.CAN.FEEDER));
+gripper = new Gripper(new WPI_VictorSPX(RoborMap.CAN.GRIPPER));
   }
 
   /**
@@ -68,7 +76,6 @@ drivetrain = new Drivetrain(new WPI_TalonSRX(RoborMap.CAN.LEFT), new WPI_TalonSR
   }
 
   /**
-   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
    */
   @Override
   public void autonomousInit() {
