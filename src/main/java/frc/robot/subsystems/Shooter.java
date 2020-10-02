@@ -7,7 +7,7 @@ public class Shooter extends SubsystemBase {
 
     SpeedController speedController;
 
-    public void shoot(SpeedController speedController) {
+    public Shooter(SpeedController speedController) {
         this.speedController = speedController;
     }
 

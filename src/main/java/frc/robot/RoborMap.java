@@ -6,6 +6,8 @@ public interface RoborMap {
        static final int RIGHT = 1;
        static  final int GRIPPER = 2;
        static final int FEEDER = 3;
+       static final int SHOOTER_MASTER = 4;
+       static final int SHOOTER_SLAVE = 5;
 
 
     }
