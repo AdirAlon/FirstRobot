@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.net.PortUnreachableException;
 
 public class Gripper extends SubsystemBase {
-    SpeedController speedController;
+    private SpeedController speedController;
 
     public Gripper(SpeedController speedController) {
         this.speedController = speedController;

@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Feeder extends SubsystemBase {
 
-    SpeedController speedController;
+    private SpeedController speedController;
 
     public Feeder(SpeedController speedController) {
         this.speedController = speedController;

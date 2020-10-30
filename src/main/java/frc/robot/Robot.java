@@ -9,17 +9,14 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.Feed;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Gripper;
 import frc.robot.subsystems.Shooter;
 
-import java.net.PortUnreachableException;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,11 +26,12 @@ import java.net.PortUnreachableException;
  */
 public class Robot extends TimedRobot {
 
-    public static Command m_autonomousCommand;
+
     public static Drivetrain drivetrain;
     public static Gripper gripper;
     public static Feeder feeder;
     public static Shooter shooter;
+    public static Encoder encoder;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -43,13 +41,14 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        drivetrain = new Drivetrain(new WPI_TalonSRX(RoborMap.CAN.LEFT), new WPI_TalonSRX(RoborMap.CAN.RIGHT));
-        feeder = new Feeder(new WPI_VictorSPX(RoborMap.CAN.FEEDER));
-        gripper = new Gripper(new WPI_VictorSPX(RoborMap.CAN.GRIPPER));
-        WPI_TalonSRX shooterMaster = new WPI_TalonSRX(RoborMap.CAN.SHOOTER_MASTER);
-        WPI_VictorSPX shooterSlave = new WPI_VictorSPX(RoborMap.CAN.SHOOTER_SLAVE);
+        drivetrain = new Drivetrain(new WPI_TalonSRX(RobotMap.CAN.LEFT), new WPI_TalonSRX(RobotMap.CAN.RIGHT));
+        feeder = new Feeder(new WPI_VictorSPX(RobotMap.CAN.FEEDER));
+        gripper = new Gripper(new WPI_VictorSPX(RobotMap.CAN.GRIPPER));
+        WPI_TalonSRX shooterMaster = new WPI_TalonSRX(RobotMap.CAN.SHOOTER_MASTER);
+        WPI_VictorSPX shooterSlave = new WPI_VictorSPX(RobotMap.CAN.SHOOTER_SLAVE);
         shooterSlave.follow(shooterMaster);
-        shooter = new Shooter(shooterMaster);
+        encoder = new Encoder(RobotMap.DIO.ENCODER_POSITIVE,RobotMap.DIO.ENCODER_NEGETIVE);
+        shooter = new Shooter(shooterMaster,encoder);
     }
 
     /**
@@ -82,14 +81,7 @@ public class Robot extends TimedRobot {
     /**
      *
      */
-    @Override
-    public void autonomousInit() {
 
-        // schedule the autonomous command (example)
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.schedule();
-        }
-    }
 
     /**
      * This function is called periodically during autonomous.
@@ -98,16 +90,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
     }
 
-    @Override
-    public void teleopInit() {
-        // This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.cancel();
-        }
-    }
+
 
     /**
      * This function is called periodically during operator control.

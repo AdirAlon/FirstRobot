@@ -7,8 +7,8 @@ import frc.robot.subsystems.Shooter;
 
 public class Shoot extends CommandBase {
 
-    Shooter shooter;
-    double timer;
+    private Shooter shooter;
+    private double timer;
 
 
     public Shoot(Shooter shooter) {
@@ -24,7 +24,7 @@ public class Shoot extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (Timer.getFPGATimestamp()-timer >=500);
+        return (Timer.getFPGATimestamp()-timer >=0.5);
     }
 
     @Override

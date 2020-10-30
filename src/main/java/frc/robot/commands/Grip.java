@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Gripper;
 
 public class Grip extends CommandBase {
-    Gripper gripper;
-    double timer;
+    private Gripper gripper;
+    private double timer;
 
 
     public Grip(Gripper gripper) {

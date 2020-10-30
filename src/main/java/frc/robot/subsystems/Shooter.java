@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
 
-    SpeedController speedController;
-    Encoder encoder;
+    private SpeedController speedController;
+    private Encoder encoder;
 
     public Shooter(SpeedController speedController, Encoder encoder) {
         this.speedController = speedController;

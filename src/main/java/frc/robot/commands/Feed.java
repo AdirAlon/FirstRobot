@@ -7,8 +7,8 @@ import frc.robot.subsystems.Gripper;
 
 public class Feed extends CommandBase {
 
-     Feeder feeder;
-    double timer;
+     private Feeder feeder;
+    private double timer;
 
 
     public Feed(Feeder feeder) {
@@ -24,7 +24,7 @@ public class Feed extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (Timer.getFPGATimestamp()-timer >=500);
+        return (Timer.getFPGATimestamp()-timer >=0.5);
     }
 
     @Override
