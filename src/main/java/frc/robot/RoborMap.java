@@ -9,7 +9,10 @@ public interface RoborMap {
        static final int SHOOTER_MASTER = 4;
        static final int SHOOTER_SLAVE = 5;
 
-
+    }
+    public interface DIO{
+        static final int ENCODER_POSITIVE = 0;
+        static final int ENCODER_NEGETIVE = 1;
     }
 
 }
